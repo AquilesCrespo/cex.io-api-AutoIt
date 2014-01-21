@@ -6,16 +6,17 @@ Autoit source files and examples for the Cex.io API.
 2. Download and install Python , for the Editor you can choose your self (personally 
    I use Komodo Edit)...
 3. Download API Functions source ( cex.io-Autoit-Functions folder )...
-4. Place the Functions inside you Autoit Include Folder...
-5. Create your Autoit project script...
+4. Place the UDF's Here Supplied inside you AutoIt Include Folder...
+5. Create your AutoIt project script...
 6. Include the API Functions to your script:
 
 ```autoit
 #include <cex-io_api.au3>
-#include <StrBetween.au3>
-#include <Array.au3>
 #include <JSON.au3>
 #include <JSON_Translate.au3> ; examples of translator functions, includes JSON_pack and JSON_unpack
+
+; And Other Includes that you may require to your own API Development
+
 ```
 
 ##Contents:
@@ -23,41 +24,51 @@ Autoit source files and examples for the Cex.io API.
 Folders
 ```Autoit
 Application-Example : Files with an Application Example that use with this API Functions
-	Content : 
-		=> api-exemple.au3 : Example of how to use this API
-		=> api-sig-Gen.py : This Generates your Nonce and Signature for send to the
+	Base-Files : 
+		=> User-API-ACC.ini : For Storing Authentication credencials...
+		=> api-sig-Gen.py : Base Files to Start your API . Here you wil Find an Signature and Nonce
+							Generator based on the cex.io-api-python From matveyco (GitHub)
 							server....
-		=> GHS_BTC-ticker.kxf : window form Example for this example
 
-base-files : Base Files to Start your API . Here you wil Find an Signature and Nonce
-			 Generator based on the cex.io-api-python From matveyco (GitHub)
-	Content : 
-		=> 
+	cex.io-Autoit-UDF's : All the base functions and extra some functions in Review and
+						  Development for Support this API and your future tools 
+						  based on it...
+	extra-UDF's : 
+		=> JSON UDF's That I founded on the internet to support this API
 
-cex.io-Autoit-UDF's : all the base functions from this API and extra functions 
-					  Development for Support this API and your future tools 
-					  based on it...
 ```
 
 API Function List
 
 ```autoit
-_GetTickerGHS_BTC() : Function for the GHS/BTC Ticker
-_GetTickerLTC_BTC() : Function for the LTC/BTC Ticker
-_GetTickerNMC_BTC() : Function for the NMC/BTC Ticker
-_GetTickerGHS_NMC() : Function for the GHS/NMC Ticker
-_GetTickerBF1_BTC() : Function for the BF1/BTC Ticker
-...
+; Tickers :
+_GetTickerGHS_BTC() : GHS/BTC Ticker data, Returns JSON dictionary
+_GetTickerLTC_BTC() : LTC/BTC Ticker data, Returns JSON dictionary
+_GetTickerNMC_BTC() : NMC/BTC Ticker data, Returns JSON dictionary
+_GetTickerGHS_NMC() : GHS/NMC Ticker data, Returns JSON dictionary
+_GetTickerBF1_BTC() : BF1/BTC Ticker data, Returns JSON dictionary
+
+; Order Books :
+_GetOrdersBookGHS_BTC() : GHS/BTC Order Book data, Returns JSON dictionary
+_GetOrdersBookLTC_BTC() : LTC/BTC Order Book data, Returns JSON dictionary
+_GetOrdersBookNMC_BTC() : NMC/BTC Order Book data, Returns JSON dictionary
+_GetOrdersBookGHS_NMC() : GHS/NMC Order Book data, Returns JSON dictionary
+_GetOrdersBookBF1_BTC() : BF1/BTC Order Book data, Returns JSON dictionary
+
+
 other Functions Being developed.....
 ```
 
 Calling Function and Output his Parameters
 
 ```autoit
-; example of how to call a Function
-_GetTickerGHS_BTC()
-; Write into console the GHS/BTC obtained in the web ticker API
-ConsoleWrite(@CRLF & "GHS/BTC" & @CRLF & @CRLF & "Last : " & $Ticker_Data[0][0] & @CRLF & "High : " & $Ticker_Data[0][1] & @CRLF & "Low : " & $Ticker_Data[0][2] & @CRLF & "Volume : " & $Ticker_Data[0][3] & @CRLF & "Ask : " & $Ticker_Data[0][4] & @CRLF & "Timestamp : " & $Ticker_Data[0][5] & @CRLF) ; Run this from sciTE
+; example of how to call a Function Storing in a Variable
+$ReturnText = _GetTickerGHS_BTC()
+; Write into console the GHS/BTC obtained in the web ticker API Outputting the Variable were was stored
+ConsoleWrite(@CRLF & "GHS/BTC" & @CRLF & @CRLF & "JSON : " & @CRLF & @CRLF & $ReturnText & @CRLF) ; Run this from sciTE
+; Or Even Write down in a msg Box Outputting the Variable were was stored
+MsgBox(0, "GHS/BTC", "JSON : " & @CRLF & @CRLF & $ReturnText & @CRLF)
 ```
+
 
 You can Find Some more usage Example in the Application-Example folder
