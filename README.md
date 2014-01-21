@@ -31,12 +31,12 @@ Application-Example : Files with an Application Example that use with this API F
 
 base-files : Base Files to Start your API . Here you wil Find an Signature and Nonce
 			 Generator based on the cex.io-api-python From matveyco (GitHub)
+	Content : 
+		=> 
 
-cex.io-Autoit-Functions : all the base functions from this API and extra functions 
-						  Development for Support this API and your future tools 
-						  based on it...
-						  Some of this Files I have founded on the internet to download 
-						  other were Remodelled by what I founded on Forums with tutorials
+cex.io-Autoit-UDF's : all the base functions from this API and extra functions 
+					  Development for Support this API and your future tools 
+					  based on it...
 ```
 
 API Function List
