@@ -13,9 +13,9 @@
 	Main Functions from this script:
 		=> Ticker GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
 		=> Order Book GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
-		=> Trade history GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC (Still in Progress)
-		=> Account balance GHS, BTC, NMC, LTC, IXC, DVC (Still in Progress)
-		=> Open orders (Still in Progress)
+		=> Trade history GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+		=> Account balance GHS, BTC, NMC, LTC, IXC, DVC
+		=> Open orders
 		=> Cancel order (Still in Progress)
 		=> Place order (Still in Progress)
 		=> Hash Rate (Still in Progress)
@@ -41,22 +41,22 @@
 ;
 ; Tickers :
 ;
-; 	=> _GetTickerGHS_BTC() : GHS/BTC Ticker data, Returns JSON dictionary
-; 	=> _GetTickerLTC_BTC() : LTC/BTC Ticker data, Returns JSON dictionary
-; 	=> _GetTickerNMC_BTC() : NMC/BTC Ticker data, Returns JSON dictionary
-; 	=> _GetTickerGHS_NMC() : GHS/NMC Ticker data, Returns JSON dictionary
-; 	=> _GetTickerBF1_BTC() : BF1/BTC Ticker data, Returns JSON dictionary
+; 	=> _GetCexIOTicker() : Get Ticker data, Returns JSON dictionary
 ;
 ; Order Books :
 ;
-; 	=> _GetOrdersBookGHS_BTC() : GHS/BTC Order Book data, Returns JSON dictionary
-; 	=> _GetOrdersBookLTC_BTC() : LTC/BTC Order Book data, Returns JSON dictionary
-; 	=> _GetOrdersBookNMC_BTC() : NMC/BTC Order Book data, Returns JSON dictionary
-; 	=> _GetOrdersBookGHS_NMC() : GHS/NMC Order Book data, Returns JSON dictionary
-; 	=> _GetOrdersBookBF1_BTC() : BF1/BTC Order Book data, Returns JSON dictionary
+; 	=> _GetCexIOOrdersBook() : Get Order Book data, Returns JSON dictionary
 ;
 ; Trade history :
-; 	=>
+; 	=> _GetCexIOTradeHistory() : Get Trade history data, Returns JSON dictionary
+;
+; Account balance :
+; 	=> _GetCexIOAccountBallance() : Get Account balance data From User Cex.io API,
+;									Returns JSON dictionary
+;
+; Open orders :
+; 	=> _GetCexIOOpenOrders() : Get Open orders data From User Cex.io API,
+;							   Returns JSON dictionary
 ;
 ; #CURRENT END# ================================================================
 
@@ -66,8 +66,8 @@
 
 #cs ----------------------------------------------------------------------------
 
- Name : _GetTickerGHS_BTC()
- Description : GET https://cex.io/api/ticker/GHS/BTC
+ Name : _GetCexIOTicker($CurrecyPair)
+ Description : GET https://cex.io/api/ticker/$CurrecyPair
  				Returns JSON dictionary:
 					last - last BTC price
  					high - last 24 hours price high
@@ -76,88 +76,14 @@
  					bid - highest buy order
  					ask - lowest sell order
  Parameters :
+	=> $CurrecyPair : Currency Pairs Availiable GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+					  Has the GHS/BTC as default...
  Author: Aquiles dos Santos Crespo
 
 #ce ----------------------------------------------------------------------------
-Func _GetTickerGHS_BTC()
-	Return _HTTP_Request("https://cex.io/api/ticker/GHS/BTC")
-EndFunc ; =======> _GetTickerGHS_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetTickerLTC_BTC()
- Description : GET https://cex.io/api/ticker/LTC/BTC
- 				Returns JSON dictionary:
-					last - last BTC price
- 					high - last 24 hours price high
- 					low - last 24 hours price low
-					volume - last 24 hours volume
- 					bid - highest buy order
- 					ask - lowest sell order
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetTickerLTC_BTC()
-	Return _HTTP_Request("https://cex.io/api/ticker/LTC/BTC")
-EndFunc ; =======> _GetTickerLTC_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetTickerNMC_BTC()
- Description : GET https://cex.io/api/ticker/NMC/BTC
- 				Returns JSON dictionary:
-					last - last BTC price
- 					high - last 24 hours price high
- 					low - last 24 hours price low
-					volume - last 24 hours volume
- 					bid - highest buy order
- 					ask - lowest sell order
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetTickerNMC_BTC()
-	Return _HTTP_Request("https://cex.io/api/ticker/NMC/BTC")
-EndFunc ; =======> _GetTicker_GetTickerNMC_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetTickerGHS_NMC()
- Description : GET https://cex.io/api/ticker/GHS/NMC
- 				Returns JSON dictionary:
-					last - last BTC price
- 					high - last 24 hours price high
- 					low - last 24 hours price low
-					volume - last 24 hours volume
- 					bid - highest buy order
- 					ask - lowest sell order
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetTickerGHS_NMC()
-	Return _HTTP_Request("https://cex.io/api/ticker/GHS/NMC")
-EndFunc ; =======> _GetTickerGHS_NMC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetTickerBF1_BTC()
- Description : GET https://cex.io/api/ticker/BF1/BTC
- 				Returns JSON dictionary:
-					last - last BTC price
- 					high - last 24 hours price high
- 					low - last 24 hours price low
-					volume - last 24 hours volume
- 					bid - highest buy order
- 					ask - lowest sell order
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetTickerBF1_BTC()
-	Return  _HTTP_Request("https://cex.io/api/ticker/BF1/BTC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
+Func _GetCexIOTicker($CurrecyPair="GHS/BTC")
+	Return _HTTP_Request("https://cex.io/api/ticker/" & $CurrecyPair)
+EndFunc ; =======> _GetTicker() END
 
 ; ============================== Tickers END ===================================
 
@@ -167,73 +93,18 @@ EndFunc ; =======> _GetTickerBF1_BTC() END
 
 #cs ----------------------------------------------------------------------------
 
- Name : _GetOrdersBookGHS_BTC()
+ Name : _GetCexIOOrdersBook()
  Description : GET https://cex.io/api/order_book/GHS/BTC , and, Returns JSON dictionary
 				with "bids" and "asks". Each is a list of open orders and each order
 				is represented as a list of price and amount.
  Parameters :
+	=> $CurrecyPair : Currency Pairs Availiable GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
  Author: Aquiles dos Santos Crespo
 
 #ce ----------------------------------------------------------------------------
-Func _GetOrdersBookGHS_BTC()
-	Return  _HTTP_Request("https://cex.io/api/order_book/GHS/BTC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetOrdersBookLTC_BTC()
- Description : GET https://cex.io/api/order_book/LTC/BTC , and, Returns JSON dictionary
-				with "bids" and "asks". Each is a list of open orders and each order
-				is represented as a list of price and amount.
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetOrdersBookLTC_BTC()
-	Return  _HTTP_Request("https://cex.io/api/order_book/LTC/BTC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetOrdersBookNMC_BTC()
- Description : GET https://cex.io/api/order_book/NMC/BTC , and, Returns JSON dictionary
-				with "bids" and "asks". Each is a list of open orders and each order
-				is represented as a list of price and amount.
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetOrdersBookNMC_BTC()
-	Return  _HTTP_Request("https://cex.io/api/order_book/NMC/BTC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetOrdersBookGHS_NMC()
- Description : GET https://cex.io/api/order_book/GHS/NMC , and, Returns JSON dictionary
-				with "bids" and "asks". Each is a list of open orders and each order
-				is represented as a list of price and amount.
- Parameters :
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetOrdersBookGHS_NMC()
-	Return  _HTTP_Request("https://cex.io/api/order_book/GHS/NMC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
-
-#cs ----------------------------------------------------------------------------
-
- Name : _GetOrdersBookBF1_BTC()
- Description : GET https://cex.io/api/order_book/BF1/BTC , and, Returns JSON dictionary
-				with "bids" and "asks". Each is a list of open orders and each order
-				is represented as a list of price and amount..
- Parameters : -----
- Author: Aquiles dos Santos Crespo
-
-#ce ----------------------------------------------------------------------------
-Func _GetOrdersBookBF1_BTC()
-	Return  _HTTP_Request("https://cex.io/api/order_book/BF1/BTC")
-EndFunc ; =======> _GetTickerBF1_BTC() END
+Func _GetCexIOOrdersBook($CurrecyPair="GHS/BTC")
+	Return  _HTTP_Request("https://cex.io/api/order_book/" & $CurrecyPair)
+EndFunc ; =======> _GetCexIOOrdersBook() END
 
 ; =========================== Order Books END ==================================
 
@@ -243,7 +114,7 @@ EndFunc ; =======> _GetTickerBF1_BTC() END
 
 #cs ----------------------------------------------------------------------------
 
- Name : _GetTradeHistoryGHS_BTC()
+ Name : _GetCexIOTradeHistory()
  Description : GET https://cex.io/api/trade_history/GHS/BTC ,
 				Params:
 					=> since - return trades with tid >= since
@@ -255,16 +126,79 @@ EndFunc ; =======> _GetTickerBF1_BTC() END
 						=> price - price
 						=> date - UNIX timestamp
 
+Parameters :
+	=> $CurrecyPair : Currency Pairs Availiable GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+
  Author: Aquiles dos Santos Crespo
 
 #ce ----------------------------------------------------------------------------
-Func _GetTradeHistoryGHS_BTC($advanced=FALSE,$since="")
-	If $advanced = FALSE Then $Return = _HTTP_Request("https://cex.io/api/trade_history/GHS/BTC")
-	If $advanced = TRUE Then $Return = _HTTP_Request("https://cex.io/api/trade_history/GHS/BTC","POST","TradeHistory",$since)
+Func _GetCexIOTradeHistory($CurrecyPair="GHS/BTC",$advanced=FALSE,$since="")
+	If $advanced = FALSE Then $Return = _HTTP_Request("https://cex.io/api/trade_history/" & $CurrecyPair)
+	If $advanced = TRUE Then $Return = _HTTP_Request("https://cex.io/api/trade_history/" & $CurrecyPair,"POST","TradeHistory",$since)
 	Return  $Return
-EndFunc ; =======> __GetTradeHistoryGHS_BTC END
+EndFunc ; =======> _GetCexIOTradeHistory END
 
 ; ========================== Trade history END =================================
+
+; ==============================================================================
+; =========================== Account balance ==================================
+; ==============================================================================
+
+#cs ----------------------------------------------------------------------------
+
+ Name : _GetCexIOAccountBallance()
+ Description : POST https://cex.io/api/balance/
+			   Params:
+					key - API key
+					signature - signature
+					nonce - nonce
+
+			   Returns JSON dictionary:
+					available - available balance
+					orders - balance in pending orders
+					bonus - referral program bonus
+
+ Author: Aquiles dos Santos Crespo
+
+#ce ----------------------------------------------------------------------------
+Func _GetCexIOAccountBallance()
+	Return _HTTP_Request("https://cex.io/api/balance/","POST","UserAuth")
+EndFunc ; =======> _GetCexIOAccountBallance END
+
+; ========================= Account balance END ================================
+
+; ==============================================================================
+; ============================= Open orders ====================================
+; ==============================================================================
+
+#cs ----------------------------------------------------------------------------
+
+ Name : _GetCexIOOpenOrders()
+ Description : POST https://cex.io/api/open_orders/$CurrecyPair
+			   Params:
+					key - API key
+					signature - signature
+					nonce - nonce
+			   Returns JSON list of open orders. Each order is represented as
+			   dictionary:
+					id - order id
+					time - timestamp
+					type - buy or sell
+					price - price
+					amount - amount
+					pending - pending amount (if partially executed)
+
+Parameters :
+	=> $CurrecyPair : Currency Pairs Availiable GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+
+ Author: Aquiles dos Santos Crespo
+
+#ce ----------------------------------------------------------------------------
+Func _GetCexIOOpenOrders($CurrecyPair="GHS/BTC")
+	Return _HTTP_Request("https://cex.io/api/open_orders/" & $CurrecyPair,"POST","UserAuth")
+EndFunc ; =======> _GetCexIOOpenOrders() END
+
+; =========================== Open orders END ==================================
 
 ; ==============================================================================
 ; ============================= Extra Funcs ====================================
@@ -274,13 +208,13 @@ EndFunc ; =======> __GetTradeHistoryGHS_BTC END
 
 #cs ----------------------------------------------------------------------------
 
- Name : _ProcessReduceMemory()
+ Name : _CexIOReduceProcessMemory()
  Description :
  Parameters :
- Author: Unknown (Don't remember the Web Site were i taked out)
+ Author:
 
 #ce ----------------------------------------------------------------------------
-Func _ProcessReduceMemory($iPID) ; Once again, not made by me, but it makes it so the script takes up less memory. :3
+Func _CexIOReduceProcessMemory($iPID) ; Once again, not made by me, but it makes it so the script takes up less memory. :3
         Local $iProcExists = ProcessExists($iPID)
         If Not $iProcExists Then Return SetError(1, 0, 0)
         If IsString($iPID) Then $iPID = $iProcExists
@@ -290,19 +224,19 @@ Func _ProcessReduceMemory($iPID) ; Once again, not made by me, but it makes it s
         DllCall("Kernel32.dll", "int", "CloseHandle", "int", $hOpenProc[0])
         If Not IsArray($aResult) Or $aResult[0] = 0 Then Return SetError(2, 0, 0)
         Return $aResult[0]
-EndFunc   ; =======> _ProcessReduceMemory END
+EndFunc   ; =======> _CexIOReduceProcessMemory END
 
 #cs ----------------------------------------------------------------------------
 
- Name : _Error()
+ Name : _CexIOErrorsOutput()
  Description :
  Parameters :
- Author: Unknown (Don't remember the Web Site were i taked out)
+ Author:
 
 #ce ----------------------------------------------------------------------------
-Func _Error() ; If there's any error, it'll just say there's an error, rather than crashing. Isn't really needed in this script, but you never know when something might happen.
-        ; ConsoleWrite("Errored" & @CRLF)
-		MsgBox($MB_SYSTEMMODAL, "Error", "There was an error...." & @CRLF & "This message box will timeout after 10 seconds or select the OK button." & @CRLF, 10)
+Func _CexIOErrorsOutput() ; If there's any error, it'll just say there's an error, rather than crashing. Isn't really needed in this script, but you never know when something might happen.
+		; ConsoleWrite("There was an error...." & @CRLF)
+		MsgBox($MB_SYSTEMMODAL, "Error", "There was an error...." & @CRLF & @CRLF & "This message box will timeout after 10 seconds or select the OK button." & @CRLF, 10)
 EndFunc   ; =======> _Error END
 
 #cs ----------------------------------------------------------------------------
@@ -329,8 +263,8 @@ EndFunc ; =======> _RunCMD() END
  Description ...: Search Text Between Strings
  Syntax.........: _StrBetween($sArg_01, $sArg_02, $sArg_03)
  Parameters ....: $sArg_01  - Text or String Containing Data to make the search.
-				   $sArg_02  - First Marker
-				   $sArg_03  - Second Marker
+				  $sArg_02  - First Marker
+				  $sArg_03  - Second Marker
  Return values .: Success      - True
                   Failure      - False
  Author ........: UNKNOWNN (Founded on Autoit Foruns don't remember thread)
