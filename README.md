@@ -1,4 +1,4 @@
-#Cex.io Autoit API - Still in Construction
+#Cex.io Autoit API
 Autoit source files and examples for the Cex.io API.
 
 ##How to use:
