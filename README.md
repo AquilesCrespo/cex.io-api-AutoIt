@@ -3,13 +3,10 @@ Autoit source files and examples for the Cex.io API.
 
 ##How to use:
 1. Download and Install AutoIt (scripting language) and Scite(most used Editor)...
-2. Download and install Python , for the Editor you can choose your self (personally 
-   I use Komodo Edit)...
-3. Download API UDF source ( cex.io-Autoit-Functions folder )...
-4. Place the UDF's Here Supplied inside you AutoIt Include Folder...
-5. Place the UDF's Supplied in extra-UDF's folder inside you AutoIt Include Folder...
-6. Create your AutoIt project script...
-7. Include the API Functions to your script:
+2. Download and install Python...
+3. Place the UDF's Here Supplied inside you AutoIt Include Folder...
+4. Create your AutoIt project script...
+5. Include the API Functions to your script:
 
 ```autoit
 #include <cex-io_api.au3>
@@ -25,16 +22,17 @@ Autoit source files and examples for the Cex.io API.
 Folders
 ```Autoit
 Application-Example : Files with an Application Example that use with this API Functions
-	Base-Files : 
-		=> User-API-ACC.ini : For Storing Authentication credencials...
-		=> api-sig-Gen.py : Base Files to Start your API . Here you wil Find an Signature and Nonce
-							Generator based on the cex.io-api-python From matveyco (GitHub)
-							server....
-
-	cex.io-Autoit-UDF's : All the base functions and extra some functions in Review and
-						  Development for Support this API and your future tools 
+	Base-Files-For APP-Development : 
+		=> User-API-ACC.ini : For Storing Authentication credencials... all the API info Must
+							  Be Stored in this File on the [User api Details] section of this
+							  File...
+		=> api-sig-Gen.py : an Signature and Nonce Generator based on the
+							cex.io-api-python From matveyco (GitHub)...
+							
+	cex.io-Autoit-UDF's : UDF's for Support this API and your future tools 
 						  based on it...
-	extra-UDF's : 
+						  
+	extra-UDF's : UDF's for Support this API Script
 		=> JSON UDF's That I founded on the internet to support this API
 
 ```
@@ -71,9 +69,23 @@ API Function List
 ; 	=> _GetCexIOOpenOrders() : Get Open orders data From User Cex.io API,
 ;							   Returns JSON dictionary
 ;
+; Cancel order :
+; 	=> _CexIOCancelOrder() : Cancel order From User Cex.io API,
+;							 Returns 'true' if order has been found and canceled.
+;
+; Place order :
+; 	=> _CexIOPlaceOrder() : Place order From User Cex.io API,
+;							Returns JSON dictionary with Placed Order Data.
+;
+; Hash Rate :
+; 	=> _GetGhashIOHashRate() : Get Hash Rate From User Cex.io API,
+;							   Returns JSON dictionary.
+;
+; Worker's Hash Rate :
+; 	=> _GetGhashIOWorkersHashRate() : Get Worker's Hash Rate From User Cex.io API,
+;							   		  Returns JSON dictionary.
+;
 ; #CURRENT END# ================================================================
-
-other Functions Being developed.....
 ```
 
 Calling Function and Output his Parameters
