@@ -16,7 +16,7 @@ import urllib2
 import ConfigParser
 
 config = ConfigParser.ConfigParser()
-config.read('User-API-Conf.ini')
+config.read('User-API-ACC.ini')
 
 nonce = '{:.10f}'.format(time.time()*1000).split('.')[0]
 
@@ -26,5 +26,5 @@ signature = hmac.new(config.get('UserAPIDetails', 'Secret'), string, digestmod=h
 config.set('GeneratedDetails', 'Nonce', nonce)
 config.set('GeneratedDetails', 'Signature', signature)
 
-with open('User-API-Conf.ini', 'w') as configfile:
+with open('User-API-ACC.ini', 'w') as configfile:
     config.write(configfile)
