@@ -39,6 +39,8 @@
 ;
 ; =========================  Public Data Functions =============================
 ;
+;			Cex.io API
+;
 ; Tickers :
 ;
 ; 	=> _GetCexIOTicker() : Get Ticker data, Returns JSON dictionary
@@ -65,6 +67,8 @@
 ; Place order :
 ; 	=> _CexIOPlaceOrder() : Place order From User Cex.io API,
 ;							Returns JSON dictionary with Placed Order Data.
+;
+;			Ghash.io API
 ;
 ; Hash Rate :
 ; 	=> _GetGhashIOHashRate() : Get Hash Rate From User Cex.io API,
@@ -419,9 +423,9 @@ EndFunc ; =======> _Post_Data() END
 #ce ----------------------------------------------------------------------------
 Func _GenCexIOAPIData()
 	_RunCMD('Cex.io Credencial API Generator....', 'START /max /d "' & @ScriptDir & '" api-sig-Gen.py' )
-	$apiKey = IniRead(@ScriptDir & "\User-API-Conf.ini", "UserAPIDetails", "Key", "NULL")
-	$apinonce = IniRead(@ScriptDir & "\User-API-Conf.ini", "GeneratedDetails", "nonce", "NULL")
-	$apisig = IniRead(@ScriptDir & "\User-API-Conf.ini", "GeneratedDetails", "signature", "NULL")
+	$apiKey = IniRead(@ScriptDir & "\User-API-ACC.ini", "UserAPIDetails", "Key", "NULL")
+	$apinonce = IniRead(@ScriptDir & "\User-API-ACC.ini", "GeneratedDetails", "nonce", "NULL")
+	$apisig = IniRead(@ScriptDir & "\User-API-ACC.ini", "GeneratedDetails", "signature", "NULL")
 	$POST_info = "key=" & $apiKey & "&signature=" & $apisig & "&nonce=" & $apinonce
 	Return $POST_info
 EndFunc ; =======> _GenCexIOAPIData() END
