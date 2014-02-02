@@ -79,22 +79,39 @@ Global $api_secret
 									  Have to use with it the $api_xtra_URL_data
 									  variable with the Currency pair Values
 									  Availiable by cex.io api
-									  GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+									  "GHS/BTC", "LTC/BTC", "NMC/BTC", "GHS/NMC", "BF1/BTC"
 						=> "order_book" : used to get teh Order book data
 										  Have to use with it the $api_xtra_URL_data
 										  variable with the Currency pair Values
 										  Availiable by cex.io api
-										  GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+										  "GHS/BTC", "LTC/BTC", "NMC/BTC", "GHS/NMC", "BF1/BTC"
 						=> "trade_history" : used to take the trade history data
 											 Have to use with it the $api_xtra_URL_data
 											 variable with the Currency pair Values
 											 Availiable by cex.io api
-											 GHS/BTC, LTC/BTC, NMC/BTC, GHS/NMC, BF1/BTC
+											 "GHS/BTC", "LTC/BTC", "NMC/BTC", "GHS/NMC", "BF1/BTC"
 						=> "balance" : Get your Account Ballance
 						=> "open_orders" : Get your open orders
-						=> "cancel_order" :
-
-
+						=> "cancel_order" : cancel order from your open orders
+											use $data for passing the order ID to
+											cancel
+						=> "place_order" : place an order based on your availiable balance
+										   Use the Function _CexIO_PlaceOrder_data() to send the
+										   data for the $data from this Function
+						=> "ghash.io" : to access the ghash.io API Use
+										Have to use with it the $api_xtra_URL_data
+										variable with the "hashrate" for check your global
+										hash rate , or the " for check the hash rate
+										from each worker that you have....
+	=> $api_xtra_URL_data : Use only if you have to insert the Currency pair availiable by
+							Cex.io API that are "GHS/BTC", "LTC/BTC", "NMC/BTC", "GHS/NMC", "BF1/BTC"
+							or if you want to check the Ghash hashing rate with "hashrate"
+							to verify global hasshing rate , or "workers" to verify the
+							hash rate from each worker....
+	=> $methode : GET or POST ... Pre-defined to GET .
+				  POST is More used when you have to pass info to the server like Autentication
+				  info...
+	=> $data : extra data to be sende to the server if needed
  Author: Aquiles dos Santos Crespo
 
 #ce ----------------------------------------------------------------------------
@@ -120,8 +137,11 @@ EndFunc ; =======> _CexIO_API() END
 #cs ----------------------------------------------------------------------------
 
  Name : _CexIO_PlaceOrder_data()
- Description :
+ Description : use this function when you need to pass info for place an order
  Parameters :
+	=> $type : type "buy" or "sell"
+	=> $ammount : ammount availiable to sell in your account
+	=> $price : Price to sell
  Author: Aquiles dos Santos Crespo
 
 #ce ----------------------------------------------------------------------------
@@ -157,7 +177,7 @@ Func _Post_Data($api,$data="")
 	Switch $api
 		Case "trade_history"
 			$POST_info = "since=" & $data
-		Case "balance"
+		Case "balance" or "ghash.io"
 			$POST_info = _GenCexIOAPIData()
 		Case "cancel_order"
 			$POST_info = _GenCexIOAPIData() & "&id=" & $data
