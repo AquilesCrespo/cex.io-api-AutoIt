@@ -5,16 +5,7 @@ Autoit source files and examples for the Cex.io API.
 1. Download and Install AutoIt (scripting language) and Scite(most used Editor)...
 2. Place the UDF's Here Supplied inside you AutoIt Include Folder...
 3. Create your AutoIt project script...
-4. Include the API Functions to your script:
-
-```autoit
-#include <cex-io_api.au3>
-#include <JSON.au3>
-#include <JSON_Translate.au3> ; examples of translator functions, includes JSON_pack and JSON_unpack
-
-; And Other Includes that you may require to your own API Development
-
-```
+4. Include the API Functions to your script
 
 ##Contents:
 
@@ -30,29 +21,3 @@ Application-Example : Files with an Application Example that use with this API F
 
 ```
 
-API Function List
-
-```autoit
-; #CURRENT# ====================================================================
-;
-; Variables :
-;
-; => No Variables to Use as API suport
-;
-; Functions :
-;
-; =========================  Public Data Functions =============================
-;
-; Beeing Remodelated since the last code update
-;
-; #CURRENT END# ================================================================
-```
-
-Calling Function and Output his Parameters
-
-```autoit
-; New Examples for you will be deployed later on....
-```
-
-
-You can Find Some more usage Example in the Application-Example folder
